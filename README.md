@@ -1,15 +1,15 @@
 # Honeypot-Attack-Mapping-Project
-Project using Azure Sentinel to create a vulnerable virtual machine, then map out attacks targeting the VM.
+Project using Azure Sentinel to create a vulnerable virtual machine and map out attacks targeting the VM.
 
 <h2>Details</h2>
 
-This project is based by [this video](https://www.youtube.com/watch?v=02RE3B2uIvw) by Anastasia Kuznetsova. It involves setting up a honeypot VM in Azure Sentinel that has increased vulnerability, then logging and mapping IP addresses any attacks originate from.
+This project is based on [this video](https://www.youtube.com/watch?v=02RE3B2uIvw) by Anastasia Kuznetsova. It involves setting up a vulnerable honeypot VM in Azure Sentinel, then logging and mapping the IP addresses any attacks originate from.
 
 <h2>Steps</h2>
 
 <h3>Creating the Resources</h3>
 
-The first step is creating our virtual machine to be used as a honeypot. The most relevant settings here are related to allowed inbound and outbound ports:
+The first step is creating our virtual machine to be used as a honeypot. The most relevant settings to change here are related to allowed inbound and outbound ports:
 
 ![image](https://github.com/user-attachments/assets/20496a7f-5695-4b45-9718-1c584880e9db)
 
@@ -22,12 +22,12 @@ Under the network security group, we create a rule allowing all inbound traffic 
 
 Moving on to the next step of the project, creating the log analytics workspace. The log analytics workspace ingests logs from the Honeypot VM. There are no settings that necessarily need to be changed here, so we can simply name the workspace resource and move on to the Security Center.
 
-I'll then add the Azure Security resource, which we can use to store raw data from Windows security events in our resource group, specifically from the Honeypot VM. 
+I'll then add the Azure Security resource, which we can use to store raw data from Windows Security Events on our VM
 
 ![image](https://github.com/user-attachments/assets/236f7f62-7996-4784-8337-1d76464e2c50)
 
 
-With that, we've created the resources needed and can move on to configuring them.
+We've now created the resources needed and can move on to configuring them.
 
 <h3>Adding the SIEM to Our Workspace</h3>
 
@@ -37,7 +37,7 @@ Microsoft Sentinel will be the SIEM we use to analyze and visualize the incoming
 
 <h3>Accessing our VM</h3>
 
-My operating system of choice is (Ubuntu) Linux. To RDP to the desktop, I'll have to go through the extra step of downloading an application. The application I use is [Remmina](https://remmina.org/), downloaded using the APT package manager:
+My operating system of choice is Ubuntu, so to RDP to the desktop, I'll have to go through the extra step of downloading an application. The application I use is [Remmina](https://remmina.org/), downloaded using the APT package manager:
 
 ![image](https://github.com/user-attachments/assets/009ddf22-2192-418d-92bf-2c6d1a867565)
 
@@ -45,7 +45,7 @@ Now that Remmina is downloaded, we can use it to connect to our VM over port 338
 
 ![image](https://github.com/user-attachments/assets/a23db705-1632-48fd-9fcb-0928a91c6a33)
 
-With the connection to the VM established, I can go ahead and completely turn off Windows Defender Firewall on it (This, of course, shouldn't need to be said, but it is **not** recommended to do this on any desktop you plan to actually use):
+With the connection to the VM established, I can go ahead and completely turn off Windows Defender Firewall on it (It is **not** recommended to do this on any desktop you plan to actually use):
 
 ![image](https://github.com/user-attachments/assets/596bd6ab-1854-4fdf-885a-97889f94e018)
 
